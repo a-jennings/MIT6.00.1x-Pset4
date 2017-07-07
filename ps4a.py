@@ -233,42 +233,13 @@ def playHand(hand, wordList, n):
       n: integer (HAND_SIZE; i.e., hand size required for additional points)
       
     """
-    # BEGIN PSEUDOCODE <-- Remove this comment when you code this function; do your coding within the pseudocode (leaving those comments in-place!)
-    # Keep track of the total score
-    
-    # As long as there are still letters left in the hand:
-    
-        # Display the hand
-        
-        # Ask user for input
-        
-        # If the input is a single period:
-        
-            # End the game (break out of the loop)
-
-            
-        # Otherwise (the input is not a single period):
-        
-            # If the word is not valid:
-            
-                # Reject invalid word (print a message followed by a blank line)
-
-            # Otherwise (the word is valid):
-
-                # Tell the user how many points the word earned, and the updated total score, in one line followed by a blank line
-                
-                # Update the hand 
-                
-
-    # Game is over (user entered a '.' or ran out of letters), so tell user the total score
-
     def showHand(hand):
-      string = ''
-      for i in hand.keys():
+        string = ''
+        for i in hand.keys():
             
             for j in range(hand[i]):
-                  string += str(i + ' ' )
-      return string
+                string += str(i + ' ' )
+        return string
 
     handLength = calculateHandlen(hand)
     gameOver = False
@@ -324,10 +295,25 @@ def playGame(wordList):
  
     2) When done playing the hand, repeat from step 1    
     """
-    # TO DO ... <-- Remove this comment when you code this function
-    print("playGame not yet implemented.") # <-- Remove this line when you code the function
-   
-
+    gameOver = False
+    hand = {}
+    while gameOver == False:
+        userInput = input("Enter n to deal a new hand, r to replay the last hand, or e to end game: ")
+       
+        if userInput == 'e':
+            gameOver = True
+        elif userInput == 'r':
+            if hand == {}:
+                print('You have not played a hand yet. Please play a new hand first!')
+                continue
+            playHand(hand, wordList, HAND_SIZE)
+        elif userInput == 'n':
+            hand = dealHand(HAND_SIZE)
+            playHand(hand, wordList, HAND_SIZE)
+            
+        else:
+            print('Invalid command.')
+    
 
 
 #
@@ -337,9 +323,3 @@ if __name__ == '__main__':
     wordList = loadWords()
     playGame(wordList)
 
-
-testDict = {'a': 1, 'c': 1, 'd': 1, 'e': 1, 'f': 2, 'n': 1, 'p': 1, 'q': 1, 't': 1}
-
-#playHand({'w':1, 's':1, 't':2, 'a':1, 'o':1, 'f':1}, wordList, n)
-#playHand({'z':1, 'a':1}, wordList, 2)
-playHand(testDict, wordList, 10)
